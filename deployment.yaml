@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: harbor-repo.vmware.com/dockerhub-proxy-cache/library/nginx:1.21.6-alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: html
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: html
+        configMap:
+          name: html
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: html
+data:
+  index.html: |-
+    <html>
+      <body>
+        <h1>Welcome to Tanzu for Kubernetes Operations!</h1>
+      </body>
+    </html>

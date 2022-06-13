@@ -1,0 +1,13 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: nginx
+spec:
+  virtualhost:
+    fqdn: cdd-nginx.amer.end2end.link
+    tls:
+      secretName: eduk8s/contourcert
+  routes:
+    - services:
+        - name: nginx
+          port: 80
