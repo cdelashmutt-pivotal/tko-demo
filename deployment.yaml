@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: harbor-repo.vmware.com/dockerhub-proxy-cache/library/nginx:1.21.6-alpine
+        image: harbor.amer.end2end.link/dockerhub/library/nginx:1.21.6-alpine
         ports:
         - containerPort: 80
         volumeMounts:
